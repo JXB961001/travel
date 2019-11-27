@@ -1,6 +1,8 @@
 # travel
 基于SSM的旅游信息管理系统
+
 项目分前后台
+
 前台
 地址：http://localhost/index
 账号：user  密码：123456
