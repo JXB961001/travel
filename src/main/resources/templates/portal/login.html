@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员中心-登陆</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:href="@{/register}">会员注册</a>  |  <a th:href="@{/goLogin}">登录</a>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li  class="cur"><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a>  >> <a th:href="@{/goLogin}">会员登录</a></div>
+    <div class="login_w clearfix">
+    <form class="layui-form" method="post" action="/userLoging">
+        <div class="login">
+            <div class="login_t">会员登录</div>
+            <div class="login_con">
+                <table class="login_tab" width="270" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" id="userName" name="userName" value="" placeholder="请输入用户名"/></td>
+                  </tr>
+                  <tr>
+                    <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                    <td><input type="password" id="password" name="password" value="" placeholder="请输入密码"/></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                       <td th:text="${message}" ></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><button class="log_b" type="submit">登 录</button>
+                        <!--<a class="back_m" th:href="@{/changePassword}">找回密码</a>--></td>
+                  </tr>
+                </table>
+            </div>
+            <div class="login_b">
+                <p>还不是梦想游会员？  <a class="free_zc" th:href="@{/register}">免费注册</a> </p>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+    <!--<div class="footer1">
+
+    </div>
+    <style>
+        .footer1{
+
+            height: 30px;
+
+            width: 100%;
+
+            background-color: #ddd;
+
+            position: fixed;
+
+            bottom: 0;
+
+        }
+    </style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+           <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+</body>
+</html>

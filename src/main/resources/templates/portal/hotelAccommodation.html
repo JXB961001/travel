@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>餐饮住宿页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+    <style>
+        a{
+            cursor: pointer;
+        }
+    </style>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/imgtoggle.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+    var iTgl=new k_iToggle();
+        iTgl.init({
+            boxId:'box',
+            numId:'num',
+            imgId:'imgs',
+            isAuto:true,
+            aCls:'act',
+            iCls:'imgs1',
+            direct:'crt'
+        });
+        chg(iTgl,'chg');
+        _auto(iTgl,'auto_1');
+        
+    //改变方向
+    function chg(o,id){
+        $('#'+id).click(function(){
+            if(o.direct()=='crt'){
+                o.direct('lvl');
+                $(this).text('纵向');
+            }else{
+                o.direct('crt');
+                $(this).text('横向');
+            }
+        });
+    }
+    
+    function _auto(o,id){
+        $('#'+id).click(function(){
+            if(o.isAuto){
+                o.isAuto=false;
+                $(this).text('自动播放已停止');
+            }else{
+                o.isAuto=true;
+                o.auto();
+                $(this).text('自动播放');
+            }
+        });
+    }
+}
+</script>
+<script type="text/javascript"> 
+    $(function(){
+        var wweya_li =$("div.tab_menu ul li");
+        wweya_li.click(function(){
+        $(this).addClass("selected")            
+         .siblings().removeClass("selected");  
+            var index =  wweya_li.index(this); 
+        $("div.tab_box > div")  
+        .eq(index).show(100)   
+            .siblings().hide(); 
+                }).hover(function(){
+            $(this).addClass("hover");
+        },function(){
+            $(this).removeClass("hover");           
+        });
+    });
+</script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li   class="cur"><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/hotelAccommodation}">餐饮住宿</a> </div>
+
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">餐饮住宿</div>
+                <div class="clumn_con">
+      
+                    <div class="cln_w">
+                        <p>热门酒店</p>
+                        <div class="cln_c clearfix">
+                            <a href="https://baike.baidu.com/item/%E9%94%A6%E6%B1%9F%E4%B9%8B%E6%98%9F%E9%85%92%E5%BA%97" target="_blank">锦江之星</a>
+                            <a href="https://baike.baidu.com/item/%E5%A6%82%E5%AE%B6%E9%85%92%E5%BA%97" target="_blank">如家酒店</a>
+                            <a href="https://baike.baidu.com/item/7%E5%A4%A9%E8%BF%9E%E9%94%81%E9%85%92%E5%BA%97?fromtitle=%E4%B8%83%E5%A4%A9%E8%BF%9E%E9%94%81%E9%85%92%E5%BA%97&fromid=513859" target="_blank">七天连锁酒店</a>
+                            <a href="https://baike.baidu.com/item/%E5%96%9C%E8%BE%BE%E5%B1%8B%E5%9B%BD%E9%99%85%E9%85%92%E5%BA%97" target="_blank">喜达屋国际酒店</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clumn_r01">
+            <div class="js_box">
+                <div class="js_tit clearfix">
+                    <div class="xs_w">显示方式：<a class="tw_a" href="#">图文</a></div>
+                    <form id="pageForm" name="pageForm" action="/hotelAccommodation" method="post">
+                        <input type="hidden" id="count" name="count" th:value="${pageParam.count}"/>
+                        <input type="hidden" id="pageNumber" name="pageNumber" th:value="${pageParam.pageNumber}"/>
+                        <input type="hidden" id="size" name="size" th:value="${pageParam.size}"/>
+                        <input type="hidden" id="pageSize" name="pageSize" th:value="${pageParam.pageSize}"/>
+                        <div class="fy_w"><a href="#" th:text="${pageParam.pageNumber}+'/'+${pageParam.size}+'页'"> </a>
+                            <a class="previousPage">上一页</a>
+                            <a class="toPageOne">首页</a>
+                            <a class="nextPage">下一页</a>
+                            <a class="toPageLast">尾页</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="js_wrap claerdix">
+                    <div class="js_con clearfix" th:each="var,iterStat: ${pageData}">
+                        <div class="js_l"><a th:href="@{/hotelPortalView(id=${var.id})}"><img th:src="${var.imgUrl}" style="  width:100px;  height: 75px;"/></a></div>
+                        <div class="js_c">
+                            <p><b><a th:href="@{/hotelPortalView(id=${var.id})}" th:text="${var.hotelName}"></a></b></p>
+                            <!-- <p><a class="js_pl" href="#"><span>0</span>条评论</a> <a class="js_gm" href="#"><span>102</span>人购买</a></p>-->
+                            <p th:if="${var.hotelStar==1}">推荐指数：不太推荐</p>
+                            <p th:if="${var.hotelStar==2}">推荐指数：勉强推荐</p>
+                            <p th:if="${var.hotelStar==3}">推荐指数：可以推荐</p>
+                            <p th:if="${var.hotelStar==4}">推荐指数：值得推荐</p>
+                            <p th:if="${var.hotelStar==5}">推荐指数：非常推荐</p>
+                            <p th:text="'联系方式：'+${var.linkPhone}"></p>
+                        </div>
+                        <div class="js_r">
+                            <p><span class="fn_o">￥</span><b th:text="${var.price}"></b>起</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".previousPage").click(function(){
+        if(parseInt($("#pageNumber").val())==1){
+            $("#pageNumber").val(1);
+            return;
+        }else{
+            $("#pageNumber").val(parseInt($("#pageNumber").val())-1);
+            $("#pageForm").submit();
+        }
+    })
+
+    $(".nextPage").click(function(){
+        if(parseInt($("#pageNumber").val())==parseInt($("#size").val())){
+            $("#pageNumber").val(parseInt($("#size").val()));
+            return;
+        }else{
+            $("#pageNumber").val(parseInt($("#pageNumber").val())+1);
+            $("#pageForm").submit();
+        }
+    })
+
+    $(".toPageOne").click(function(){
+        $("#pageNumber").val(1);
+        $("#pageForm").submit();
+    })
+
+    $(".toPageLast").click(function(){
+        $("#pageNumber").val(parseInt($("#size").val()));
+        $("#pageForm").submit();
+    })
+
+</script>
+</body>
+</html>

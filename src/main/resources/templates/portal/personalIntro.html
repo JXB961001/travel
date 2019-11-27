@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>中国梦想游-会员登录页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li class="cur" th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/userCenter}">会员中心</a></div>
+    <div class="fmember">
+    	<div class="fmleft">
+        	<div class="fmleft_top"><img src="images/fmbt1.png" border="0"/></div>
+            <div class="fmlist">
+                <ul>
+                    <li class="f1">订单中心</li>
+                    <li> >><a th:href="@{/myOrder}">我的订单</a> </li>
+                    <li> >><a th:href="@{/myMessage}">我的留言</a> </li>
+                </ul>
+
+                <ul>
+                    <li class="f1">账户信息</li>
+                    <li> >><a th:href="@{/personInfo}">个人资料</a> </li>
+                    <li> >><a th:href="@{/changePassword}">修改密码</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="fmright">
+        	<div class="fmr1">
+            	<div class="fmr1_top">个人资料</div>
+                <div class="fmr1_m">
+                <form method="post" action="/personSave">
+                    <input type="hidden" id="id" name="id" th:value="${entity.id}"/>
+                    <p class="fp3">
+                    	<table border="0" cellpadding="0" cellspacing="0" width="638">
+                        	<tr>
+                            	<td width="60" align="left" height="30">用户名：</td>
+                                <td width="578" align="left" height="30"><input type="text" th:value="${entity.userName}" class="finput3" id="userName" name="userName" value="" placeholder="请输入用户名"/></td>
+                            </tr>
+                            <tr>
+                            	<td width="100" align="left" height="30">真实姓名：</td>
+                                <td width="578" align="left" height="30"><input type="text" th:value="${entity.name}" class="finput3" id="name" name="name" value="" placeholder="请输入真实姓名"/></td>
+                            </tr>
+                            <tr>
+                                <td width="100" align="left" height="30">联系方式：</td>
+                                <td width="578" align="left" height="30"><input type="text" th:value="${entity.linkTel}" class="finput3" id="linkTel" name="linkTel" value="" placeholder="请输入真实姓名"/></td>
+                            </tr>
+                            <tr>
+                            	<td width="100" align="left" height="30">身份证号码：</td>
+                                <td width="578" align="left" height="30"><input type="text" th:value="${entity.icCode}" class="finput3" id="icCode" name="icCode" value="" placeholder="请输入身份证号码"/></td>
+                            </tr>
+                            <tr>
+                                <td width="62">所在地：</td>
+                                <td width="588">
+                                    <select id="province" name="province">
+                                        <option th:selected="${entity.province==1?'selected':'false'}" value="1">北京</option>
+                                        <option th:selected="${entity.province==2?'selected':'false'}" value="2">天津</option>
+                                        <option th:selected="${entity.province==3?'selected':'false'}" value="3">上海</option>
+                                        <option th:selected="${entity.province==4?'selected':'false'}" value="4">重庆</option>
+                                        <option th:selected="${entity.province==5?'selected':'false'}" value="5">河北</option>
+                                        <option th:selected="${entity.province==6?'selected':'false'}" value="6">河南</option>
+                                        <option th:selected="${entity.province==7?'selected':'false'}" value="7">云南</option>
+                                        <option th:selected="${entity.province==8?'selected':'false'}" value="8">辽宁</option>
+                                        <option th:selected="${entity.province==9?'selected':'false'}" value="9">黑龙江</option>
+                                        <option th:selected="${entity.province==10?'selected':'false'}" value="10">湖南</option>
+                                        <option th:selected="${entity.province==11?'selected':'false'}" value="11">安徽</option>
+                                        <option th:selected="${entity.province==12?'selected':'false'}" value="12">山东</option>
+                                        <option th:selected="${entity.province==13?'selected':'false'}" value="13">新疆</option>
+                                        <option th:selected="${entity.province==14?'selected':'false'}" value="14">江苏</option>
+                                        <option th:selected="${entity.province==15?'selected':'false'}" value="15">浙江</option>
+                                        <option th:selected="${entity.province==16?'selected':'false'}" value="16">江西</option>
+                                        <option th:selected="${entity.province==17?'selected':'false'}" value="17">湖北</option>
+                                        <option th:selected="${entity.province==18?'selected':'false'}" value="18">广西</option>
+                                        <option th:selected="${entity.province==19?'selected':'false'}" value="19">甘肃</option>
+                                        <option th:selected="${entity.province==20?'selected':'false'}" value="20">山西</option>
+                                        <option th:selected="${entity.province==21?'selected':'false'}" value="21">内蒙古</option>
+                                        <option th:selected="${entity.province==22?'selected':'false'}" value="22">陕西</option>
+                                        <option th:selected="${entity.province==23?'selected':'false'}" value="23">吉林</option>
+                                        <option th:selected="${entity.province==24?'selected':'false'}" value="24">福建</option>
+                                        <option th:selected="${entity.province==25?'selected':'false'}" value="25">贵州</option>
+                                        <option th:selected="${entity.province==26?'selected':'false'}" value="26">广东</option>
+                                        <option th:selected="${entity.province==27?'selected':'false'}" value="27">青海</option>
+                                        <option th:selected="${entity.province==28?'selected':'false'}" value="28">西藏</option>
+                                        <option th:selected="${entity.province==29?'selected':'false'}" value="29">四川</option>
+                                        <option th:selected="${entity.province==30?'selected':'false'}" value="30">宁夏</option>
+                                        <option th:selected="${entity.province==31?'selected':'false'}" value="31">海南</option>
+                                        <option th:selected="${entity.province==32?'selected':'false'}" value="32">台湾</option>
+                                        <option th:selected="${entity.province==33?'selected':'false'}" value="33">香港</option>
+                                        <option th:selected="${entity.province==34?'selected':'false'}" value="34">澳门</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td colspan="2" height="30">提示：<span class="fspan9"> 您的资料将被默认保存为第一游客信息，请您完整如实填写，避免资料不实带来的不便。</span></td>
+                            </tr>
+                            <tr>
+                            	<td colspan="2" height="30"><button type="submit"><input type="image" src="images/fbtn2.png"/></button></td>
+                            </tr>
+                        </table>
+                    </p>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+          <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+        <br style="clear:both"/>
+    </div>
+</div>-->
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>首页--中国梦想游运营平台</title>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/css/font_eolqem241z66flxr.css" media="all" />
+	<link rel="stylesheet" href="/css/main.css" media="all" />
+</head>
+<body class="childrenBody">
+	<script type="text/javascript" src="/js/echarts.min.js"></script>
+	<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js"></script> 
+	<script type="text/javascript" src="/js/china.js"></script>
+	<div id="myChart" style="width:1135px;height:560px"></div>
+	<script th:inline="javascript">
+		function randomData() {
+		    return Math.round(Math.random() * 1000);
+		}
+		var myChart = echarts.init(document.getElementById('myChart'));
+		option = {
+		    title: {
+		        text: '用户来源省份',
+		        left: 'center'
+		    },
+		    tooltip: {
+		        trigger: 'item'
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        left: 'left',
+		        data: ['注册用户']
+		    },
+		    visualMap: {
+		        min: 0,
+		        max: 2500,
+		        left: 'left',
+		        top: 'bottom',
+		        text: ['高', '低'], // 文本，默认为数值文本
+		        calculable: true
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            saveAsImage: {}
+		        }
+		    },
+		    series: [{
+		        name: '注册用户',
+		        type: 'map',
+		        mapType: 'china',
+		        roam: false,
+		        label: {
+		            normal: {
+		                show: true
+		            },
+		            emphasis: {
+		                show: true
+		            }
+		        },
+		        data: [{
+		            name: '北京',
+		            value: [[${porvice[0].count}]]
+		        }, {
+		            name: '天津',
+		            value: [[${porvice[1].count}]]
+		        }, {
+		            name: '上海',
+		            value: [[${porvice[2].count}]]
+		        }, {
+		            name: '重庆',
+		            value: [[${porvice[3].count}]]
+		        }, {
+		            name: '河北',
+		            value: [[${porvice[4].count}]]
+		        }, {
+		            name: '河南',
+		            value: [[${porvice[5].count}]]
+		        }, {
+		            name: '云南',
+		            value: [[${porvice[6].count}]]
+		        }, {
+		            name: '辽宁',
+		            value: [[${porvice[7].count}]]
+		        }, {
+		            name: '黑龙江',
+		            value: [[${porvice[8].count}]]
+		        }, {
+		            name: '湖南',
+		            value: [[${porvice[9].count}]]
+		        }, {
+		            name: '安徽',
+		            value: [[${porvice[10].count}]]
+		        }, {
+		            name: '山东',
+		            value: [[${porvice[11].count}]]
+		        }, {
+		            name: '新疆',
+		            value: [[${porvice[12].count}]]
+		        }, {
+		            name: '江苏',
+		            value: [[${porvice[13].count}]]
+		        }, {
+		            name: '浙江',
+		            value: [[${porvice[14].count}]]
+		        }, {
+		            name: '江西',
+		            value: [[${porvice[15].count}]]
+		        }, {
+		            name: '湖北',
+		            value: [[${porvice[16].count}]]
+		        }, {
+		            name: '广西',
+		            value: [[${porvice[17].count}]]
+		        }, {
+		            name: '甘肃',
+		            value: [[${porvice[18].count}]]
+		        }, {
+		            name: '山西',
+		            value: [[${porvice[19].count}]]
+		        }, {
+		            name: '内蒙古',
+		            value: [[${porvice[20].count}]]
+		        }, {
+		            name: '陕西',
+		            value: [[${porvice[21].count}]]
+		        }, {
+		            name: '吉林',
+		            value: [[${porvice[22].count}]]
+		        }, {
+		            name: '福建',
+		            value: [[${porvice[23].count}]]
+		        }, {
+		            name: '贵州',
+		            value: [[${porvice[24].count}]]
+		        }, {
+		            name: '广东',
+		            value: [[${porvice[25].count}]]
+		        }, {
+		            name: '青海',
+		            value: [[${porvice[26].count}]]
+		        }, {
+		            name: '西藏',
+		            value: [[${porvice[27].count}]]
+		        }, {
+		            name: '四川',
+		            value: [[${porvice[28].count}]]
+		        }, {
+		            name: '宁夏',
+		            value: [[${porvice[29].count}]]
+		        }, {
+		            name: '海南',
+		            value: [[${porvice[30].count}]]
+		        }, {
+		            name: '台湾',
+		            value: [[${porvice[31].count}]]
+		        }, {
+		            name: '香港',
+		            value: [[${porvice[32].count}]]
+		        }, {
+		            name: '澳门',
+		            value: [[${porvice[33].count}]]
+		        }]
+		    }]
+		};
+		myChart.setOption(option);
+	</script>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国梦想游-会员注册页</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var wweya_li =$("div.tab_menu ul li");
+            wweya_li.click(function(){
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index =  wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function(){
+                $(this).addClass("hover");
+            },function(){
+                $(this).removeClass("hover");
+            });
+        });
+        //判断是否为空
+       /* function b(){
+            if($("#userName").val()==""||$("#password").val()==""||$("#checkPassword").val()==""||$("#linkTel").val()==""
+                ||$("#name").val()==""||$("#icCode").val()==""||$("#checkbox").val()!="ok"){
+                alert("请填写必填字段");
+            }
+        }*/
+    </script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:href="@{/register}">会员注册</a>  |  <a th:href="@{/goLogin}">登录</a>
+        </div>
+    </div>
+    <div class="head_w">
+        <div class="head_t clearfix">
+            <div class="logo"><img src="images/logo.jpg"/></div>
+            <div class="rx_line"><img src="images/rx.jpg"/></div>
+        </div>
+    </div>
+    <div class="mainNav clearfix">
+        <ul class="Nav_ul">
+            <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+            <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+            <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+            <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+            <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+            <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+            <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+            <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+            <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+        </ul>
+    </div>
+    <div class="b_wrap">
+        <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a>  >> <a th:href="@{/register}">会员注册</a></div>
+        <div class="regin_w clearfix">
+            <div class="regin_con">
+                <div class="regin">
+                    <div class="tab_menu regin_menu">
+                        <ul class="regin_ul">
+                            <li class="selected">注册</li>
+                        </ul>
+                    </div>
+                    <div class="tab_box">
+                        <div class="regin_tw">
+                            <form class="layui-form" method="post" action="/registering">
+                                <table width="650" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="62">用户名：</td>
+                                        <td width="588"><input class="rg_in" type="text" id="userName" name="userName" value="" placeholder="请输入用户名"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>登录密码：</td>
+                                        <td><input class="rg_in" type="password" id="password" name="password" value="" placeholder="请输入密码"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>确认密码：</td>
+                                        <td><input class="rg_in" type="password" id="checkPassword" name="checkPassword" value="" placeholder="请输入确认密码"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="62">联系方式：</td>
+                                        <td width="588"><input class="rg_in" type="text" id="linkTel" name="linkTel" value="" placeholder="请输入联系方式"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="62">真实姓名：</td>
+                                        <td width="588"><input class="rg_in" type="text" id="name" name="name" value="" placeholder="请输入真实姓名"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="62">身份证号：</td>
+                                        <td width="588"><input class="rg_in" type="text" id="icCode" name="icCode" value="" placeholder="请输入身份证号码"/>
+                                            <font color="red">*必填字段</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="62">所在地：</td>
+                                        <td width="588">
+                                            <select id="province" name="province">
+                                                <option value="1">北京</option>
+                                                <option value="2">天津</option>
+                                                <option value="3">上海</option>
+                                                <option value="4">重庆</option>
+                                                <option value="5">河北</option>
+                                                <option value="6">河南</option>
+                                                <option value="7">云南</option>
+                                                <option value="8">辽宁</option>
+                                                <option value="9">黑龙江</option>
+                                                <option value="10">湖南</option>
+                                                <option value="11">安徽</option>
+                                                <option value="12">山东</option>
+                                                <option value="13">新疆</option>
+                                                <option value="14">江苏</option>
+                                                <option value="15">浙江</option>
+                                                <option value="16">江西</option>
+                                                <option value="17">湖北</option>
+                                                <option value="18">广西</option>
+                                                <option value="19">甘肃</option>
+                                                <option value="20">山西</option>
+                                                <option value="21">内蒙古</option>
+                                                <option value="22">陕西</option>
+                                                <option value="23">吉林</option>
+                                                <option value="24">福建</option>
+                                                <option value="25">贵州</option>
+                                                <option value="26">广东</option>
+                                                <option value="27">青海</option>
+                                                <option value="28">西藏</option>
+                                                <option value="29">四川</option>
+                                                <option value="30">宁夏</option>
+                                                <option value="31">海南</option>
+                                                <option value="32">台湾</option>
+                                                <option value="33">香港</option>
+                                                <option value="34">澳门</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td><input type="checkbox" id="checkbox" value="ok"/> 愿意接受中国梦想游会员协议 <font color="red">*必选</font> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td><button type="submit" ><img src="images/agree_b.jpg"/></button></td>
+                                    </tr>
+                                    <tr th:if="${message!=null}">
+                                        <td>&nbsp;</td>
+                                        <td th:text="${message}"></td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <div class="pdv_class" title="内容标题" style="width:650px;height:160px;z-index:12; overflow-y:auto;overflow-x:hidden;">
+                                <div  class="pdv_content" style="overflow:visible;width:100%;">
+                                    <div class="pdv_border" style="margin:0;padding:0px;height:100%;">
+                                        <div style="height:25px;margin:1px;display:none;background:;">
+
+                                        </div>
+                                        <div class="contentDetail">
+                                            <div class="step0" style="display: block;">
+                                                <p class="st_tit">中国梦想游会员协议</p>
+                                                <div class="stp01"><p>一、服务条款<p></p>
+                                                    中国梦想游提供的服务将完全按照其发布的使用协议、服务条款和操作规则严格执行。为获得中国梦想游服务，服务使用人（以下称“会员”）应当同意本协议的全部条款并按照页面上的提示完成全部的注册程序。</p></div>
+
+                                                <div class="stp01"><p>二、目的<p></p>
+                                                    本协议是以规定用户使用中国梦想游提供的服务时，中国梦想游与会员间的权利、义务、服务条款等基本事宜为目的。</p></div>
+
+                                                <div class="stp01"><p> 三、遵守法律及法律效力<p></p>
+                                                    本服务使用协议在向会员公告后，开始提供服务或以其他方式向会员提供服务同时产生法律效力。</p><p>
+
+                                                        会员同意遵守《中华人民共和国保密法》、《计算机信息系统国际联网保密管理规定》、《中华人民共和国计算机信息系统安全保护条例》、《计算机信息网络国际联网安全保护管理办法》、《中华人民共和国计算机信息网络国际联网管理暂行规定》及其实施办法等相关法律法规的任何及所有的规定，并对会员以任何方式使用服务的任何行为及其结果承担全部责任。</p><p>
+
+                                                        在任何情况下，如果本网站合理地认为会员的任何行为，包括但不限于会员的任何言论和其他行为违反或可能违反上述法律和法规的任何规定，本网站可在任何时候不经任何事先通知终止向会员提供服务。</p><p>
+
+                                                        本网站可能不时的修改本协议的有关条款，一旦条款内容发生变动，本网站将会在相关的页面提示修改内容。在更改此使用服务协议时，本网站将说明更改内容的执行日期，变更理由等。且应同现行的使用服务协议一起，在更改内容发生效力前7日内及发生效力前日向会员公告。</p><p>
+
+                                                        会员需仔细阅读使用服务协议更改内容，会员由于不知变更内容所带来的伤害，本网站一概不予负责。</p><p>
+
+                                                        如果不同意本网站对服务条款所做的修改，用户有权停止使用网络服务。如果用户继续使用网络服务，则视为用户接受服务条款的变动。
+
+                                                    </p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide regin_tw">dhgjfd</div>
+                    </div>
+                </div>
+            </div>
+            <div class="regin_info">
+                <p class="if_t"><b>为什么选择中国梦想游</b></p>
+                <div>
+                    <div class="if_tit"><img src="images/dj_01.jpg"/> 低价、放心</div>
+                    <p>低价保证、无零负团费、无特殊附加
+                        费、9大出游保障。</p>
+                </div>
+                <div>
+                    <div class="if_tit"><img src="images/ff_01.jpg"/> 产品丰富</div>
+                    <p>8万+旅游产品，涵盖跟团、自助、自
+                        驾、邮轮、公司游等，总有一款适合您。</p>
+                </div>
+                <div>
+                    <div class="if_tit"><img src="images/xx_01.jpg"/> 300万游客的选择</div>
+                    <p>累计服务300万人次，60万真实点评，
+                        2万原创游记。</p>
+                </div>
+                <div>
+                    <div class="if_tit"><img src="images/fw_01.jpg"/> 更多服务</div>
+                    <p>全国15个出发城市，7X24小时服务</p>
+                </div>
+                <center><img src="images/zc_img0.jpg"/></center>
+            </div>
+        </div>
+    </div>
+<!--    <div class="footer1">
+        <center ><p><font style="color: #0C0C0C;font-size: mell Rights reserved.</font></p></center>
+    </div>
+    <style>
+        .footer1{
+
+            height: 30px;
+
+            width: 100%;
+
+            background-color: #ddd;
+
+            position: fixed;
+
+            bottom: 0;
+
+        }
+    </style>-->
+    <!--<div class="footer_w">
+        <div class="footer clearfix">
+            <div class="footer_c">
+                <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+                <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+            </div>
+            <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+        </div>
+    </div>-->
+</body>
+</html>

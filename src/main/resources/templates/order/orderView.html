@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>订单信息查看</title>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/css/font_eolqem241z66flxr.css" media="all"/>
+</head>
+<body class="childrenBody">
+	<form class="layui-form"  action="/manager/orderSave" method="post">
+		<input th:value="${entity.id}" id="id" name="id" type="hidden"/>
+		<!--<div class="layui-form-item">
+			<label class="layui-form-label">用户ID</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.userId}" readonly="readonly" id="userId" name="userId" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入用户ID"/>
+			</div>
+		</div>-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户名称</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.userName}" readonly="readonly" id="userName" name="userName" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入用户名称"/>
+			</div>
+		</div>
+		<!--<div class="layui-form-item">
+			<label class="layui-form-label">产品ID</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.productId}" readonly="readonly" id="productId" name="productId" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入产品ID"/>
+			</div>
+		</div>-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">产品名称</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.productName}" readonly="readonly" id="productName" name="productName" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入产品名称"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">产品类型</label>
+			<div class="layui-input-block">
+				<	<input type="radio" th:checked="${entity.productType==0?'checked':'false'}" name="productType" value="0" title="旅游路线"/>
+				<input type="radio" th:checked="${entity.productType==1?'checked':'false'}" name="productType" value="1" title="旅游景点"/>
+				<input type="radio" th:disabled="${entity.productType!=2?'disabled':'false'}" th:checked="${entity.productType==2?'checked':'false'}" name="productType" value="2" title="酒店"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单金额</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.fee}" readonly="readonly" id="fee" name="fee" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入订单金额"/>
+			</div>
+		</div>
+		<!--<div class="layui-form-item">
+			<label class="layui-form-label">订单编号</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.orderCode}" readonly="readonly" id="orderCode" name="orderCode" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入订单编号"/>
+			</div>
+		</div>-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单日期</label>
+			<div class="layui-input-inline">
+				<input readonly="readonly" th:value="${entity.orderTime}" type="text" class="layui-input" id="orderTime" name="orderTime" lay-verify="date" onclick="layui.laydate({elem:this,type: 'datetime'})"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">出发日期</label>
+			<div class="layui-input-inline">
+				<input readonly="readonly" th:value="${entity.setoffTime}" type="text" class="layui-input" id="setoffTime" name="setoffTime" lay-verify="date" onclick="layui.laydate({elem:this,type: 'datetime'})"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">联系方式</label>
+			<div class="layui-input-block">
+				<input readonly="readonly" th:value="${entity.linkTel}" id="linkTel" name="linkTel" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入客户联系方式"/>
+			</div>
+		</div>
+		<!--<div class="layui-form-item">
+			<label class="layui-form-label">人数</label>
+			<div class="layui-input-block">
+				<input readonly="readonly" th:value="${entity.peopleCount}" id="peopleCount" name="peopleCount" type="number" class="layui-input newsName" lay-verify="required" placeholder="请输入人数"/>
+			</div>
+		</div>-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">身份证号码</label>
+			<div class="layui-input-block">
+				<input readonly="readonly" th:value="${entity.icCode}" id="icCode" name="icCode" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入身份证号码"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">特殊要求</label>
+			<div class="layui-input-block">
+				<textarea readonly="readonly" class="layui-textarea" th:text="${entity.requirement}" id="requirement" name="requirement" lay-verify="content" placeholder="请输入特殊要求"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">状态</label>
+			<div class="layui-input-inline">
+				<select disabled="disabled" id="state" name="state" class="newsLook" lay-filter="browseLook">
+					<option th:selected="${entity.state==0?'selected':'false'}" value="0">待付款</option>
+					<option th:selected="${entity.state==1?'selected':'false'}" value="1">已付款</option>
+					<option th:selected="${entity.state==2?'selected':'false'}" value="2">已撤销</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<a class="layui-btn" th:href="@{/manager/orderList}">返回</a>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/order/orderEdit.js"></script>
+</body>
+</html>

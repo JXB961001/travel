@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>用户信息修改--layui后台管理模板</title>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<style type="text/css">
+		.layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+		@media(max-width:1240px){
+			.layui-form-item .layui-inline{ width:100%; float:none; }
+		}
+	</style>
+</head>
+<body class="childrenBody">
+<form class="layui-form"  action="/manager/userSave" method="post">
+	<input th:value="${entity?.id}" id="id" name="id" type="hidden"/>
+	<div class="layui-form-item">
+		<label class="layui-form-label">用户名</label>
+		<div class="layui-input-block">
+			<input th:value="${entity?.userName}" id="userName" name="userName" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入用户名"/>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">密码</label>
+		<div class="layui-input-block">
+			<input th:value="${entity?.password}" id="password" name="password" type="password" class="layui-input newsName" lay-verify="required" placeholder="请输入密码"/>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">手机号码</label>
+		<div class="layui-input-block">
+			<input th:value="${entity?.linkTel}" id="linkTel" name="linkTel" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入手机号码"/>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">真实姓名</label>
+		<div class="layui-input-block">
+			<input th:value="${entity?.name}" id="name" name="name" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入真实姓名"/>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">身份证</label>
+		<div class="layui-input-block">
+			<input th:value="${entity?.icCode}" id="icCode" name="icCode" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入身份证"/>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">省份</label>
+		<div class="layui-input-inline">
+			<select id="province" name="province" class="newsLook" lay-filter="browseLook">
+				<option th:selected="${entity?.province==1?'selected':'false'}" value="1">北京</option>
+				<option th:selected="${entity?.province==2?'selected':'false'}" value="2">天津</option>
+				<option th:selected="${entity?.province==3?'selected':'false'}" value="3">上海</option>
+				<option th:selected="${entity?.province==4?'selected':'false'}" value="4">重庆</option>
+				<option th:selected="${entity?.province==5?'selected':'false'}" value="5">河北</option>
+				<option th:selected="${entity?.province==6?'selected':'false'}" value="6">河南</option>
+				<option th:selected="${entity?.province==7?'selected':'false'}" value="7">云南</option>
+				<option th:selected="${entity?.province==8?'selected':'false'}" value="8">辽宁</option>
+				<option th:selected="${entity?.province==9?'selected':'false'}" value="9">黑龙江</option>
+				<option th:selected="${entity?.province==10?'selected':'false'}" value="10">湖南</option>
+				<option th:selected="${entity?.province==11?'selected':'false'}" value="11">安徽</option>
+				<option th:selected="${entity?.province==12?'selected':'false'}" value="12">山东</option>
+				<option th:selected="${entity?.province==13?'selected':'false'}" value="13">新疆</option>
+				<option th:selected="${entity?.province==14?'selected':'false'}" value="14">江苏</option>
+				<option th:selected="${entity?.province==15?'selected':'false'}" value="15">浙江</option>
+				<option th:selected="${entity?.province==16?'selected':'false'}" value="16">江西</option>
+				<option th:selected="${entity?.province==17?'selected':'false'}" value="17">湖北</option>
+				<option th:selected="${entity?.province==18?'selected':'false'}" value="18">广西</option>
+				<option th:selected="${entity?.province==19?'selected':'false'}" value="19">甘肃</option>
+				<option th:selected="${entity?.province==20?'selected':'false'}" value="20">山西</option>
+				<option th:selected="${entity?.province==21?'selected':'false'}" value="21">内蒙古</option>
+				<option th:selected="${entity?.province==22?'selected':'false'}" value="22">陕西</option>
+				<option th:selected="${entity?.province==23?'selected':'false'}" value="23">吉林</option>
+				<option th:selected="${entity?.province==24?'selected':'false'}" value="24">福建</option>
+				<option th:selected="${entity?.province==25?'selected':'false'}" value="25">贵州</option>
+				<option th:selected="${entity?.province==26?'selected':'false'}" value="26">广东</option>
+				<option th:selected="${entity?.province==27?'selected':'false'}" value="27">青海</option>
+				<option th:selected="${entity?.province==28?'selected':'false'}" value="28">西藏</option>
+				<option th:selected="${entity?.province==29?'selected':'false'}" value="29">四川</option>
+				<option th:selected="${entity?.province==30?'selected':'false'}" value="30">宁夏</option>
+				<option th:selected="${entity?.province==31?'selected':'false'}" value="31">海南</option>
+				<option th:selected="${entity?.province==32?'selected':'false'}" value="32">台湾</option>
+				<option th:selected="${entity?.province==33?'selected':'false'}" value="33">香港</option>
+				<option th:selected="${entity?.province==34?'selected':'false'}" value="34">澳门</option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">状态</label>
+		<div class="layui-input-inline">
+			<select id="state" name="state" class="newsLook" lay-filter="browseLook">
+				<option th:selected="${entity?.state==1?'selected':'false'}" value="1">已注册</option>
+				<option th:selected="${entity?.state==2?'selected':'false'}" value="2">注销</option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" type="submit" lay-submit="">保存</button>
+			<a class="layui-btn" th:href="@{/manager/userList}">返回</a>
+			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			<span th:text="${message}"></span>
+		</div>
+	</div>
+</form>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/user/addUser.js"></script>
+</body>
+</html>

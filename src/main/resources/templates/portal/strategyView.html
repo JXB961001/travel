@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>中国梦想游--旅游攻略页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"> 
+    $(function(){
+        var wweya_li =$("div.tab_menu ul li");
+        wweya_li.click(function(){
+        $(this).addClass("selected")            
+         .siblings().removeClass("selected");  
+            var index =  wweya_li.index(this); 
+        $("div.tab_box > div")  
+        .eq(index).show(100)   
+            .siblings().hide(); 
+                }).hover(function(){
+            $(this).addClass("hover");
+        },function(){
+            $(this).removeClass("hover");           
+        });
+    });
+</script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li class="cur"><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/strategy}">旅游攻略</a>>> <a href="#">攻略详情</a> </div>
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">旅游攻略</div>
+                <div class="clumn_con">
+
+                    <div class="cln_w">
+                        <p>热门主题</p>
+                        <div class="cln_c clearfix">
+                            <a href="https://baike.baidu.com/item/%E6%B8%A9%E6%B3%89/159" target="_blank">温泉</a>
+                            <a href="https://baike.baidu.com/item/%E5%8F%A4%E9%95%87" target="_blank">古镇</a>
+                            <a href="https://baike.baidu.com/item/%E6%B9%96%E6%B3%8A" target="_blank">湖泊</a>
+                            <a href="https://baike.baidu.com/item/%E6%BB%91%E9%9B%AA/26193" target="_blank">滑雪</a>
+                            <a href="https://baike.baidu.com/item/%E6%B5%B7%E8%BE%B9/5478955" target="_blank">海边</a>
+                            <a href="https://baike.baidu.com/item/%E7%BE%8E%E9%A3%9F" target="_blank">美食</a>
+                            <a href="https://baike.baidu.com/item/%E7%99%BB%E5%B1%B1/6176955" target="_blank">登山</a>
+                            <a href="https://baike.baidu.com/item/%E4%B8%BB%E9%A2%98%E5%85%AC%E5%9B%AD" target="_blank">主题公园</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clumn_r">
+            <div class="tc_tit" >攻略详情</div>
+            <div class="xq_wrap clearfix">
+                <div class="xq_left"><img th:src="${entity.imgUrl}"/></div>
+              <div class="xq_right">
+                    <div class="xq_detail">
+                        <p  th:text="'标题：'+${entity.title}"></p>
+                        <p th:text="'简介：'+${entity.summary}"></p>
+
+                        <p th:if="${entity.rating==1}">推荐指数：不太推荐</p>
+                        <p th:if="${entity.rating==2}">推荐指数：勉强推荐</p>
+                        <p th:if="${entity.rating==3}">推荐指数：可以推荐</p>
+                        <p th:if="${entity.rating==4}">推荐指数：值得推荐</p>
+                        <p th:if="${entity.rating==5}">推荐指数：非常推荐</p>
+
+
+                    </div>
+                    <!--<div class="share">
+                        <div class="bshare-custom"><strong>分享到&nbsp;&nbsp;</strong><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="xq_wrap">
+              <div class="tab_menu xq_menu">
+                <ul class="xq_ul">
+                    <li class="selected">内容图片</li>
+                </ul>
+              </div>
+                <div>    </div>
+                <p></p><br><center><br>
+                <img th:src="${entity.introUrl}"/></center>
+                <!--</div>-->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+    <center ><p><font style="color: #0C0C0C;font-size: medium;text-align: center;display: table-cell;vertical-align: middle" > copghts reserved.</font></p></center>
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</body>
+</html>

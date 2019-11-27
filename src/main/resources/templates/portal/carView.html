@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国梦想游--旅游路线页</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var wweya_li =$("div.tab_menu ul li");
+            wweya_li.click(function(){
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index =  wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function(){
+                $(this).addClass("hover");
+            },function(){
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li  ><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li class="cur"><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/car}">旅游车票</a> <a href="#">车票详情</a> </div>
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">旅游车票</div>
+                <div class="clumn_con">
+
+                    <div class="cln_w">
+                    <p>车票类型</p>
+                    <div class="cln_c clearfix">
+                        <a href="https://baike.baidu.com/item/%E6%9C%BA%E7%A5%A8?fromtitle=%E9%A3%9E%E6%9C%BA%E7%A5%A8&fromid=3033494" target="_blank">飞机票</a>
+                        <a href="https://baike.baidu.com/item/%E7%81%AB%E8%BD%A6%E7%A5%A8/878546" target="_blank">火车票</a>
+                        <a href="https://baike.baidu.com/item/%E6%B1%BD%E8%BD%A6%E7%A5%A8" target="_blank">汽车票</a>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="clumn_r">
+            <div class="tc_tit" th:text="${entity.title}"></div>
+            <div class="xq_wrap clearfix">
+                <div class="xq_left"><img th:src="${entity.imgUrl}"/></div>
+                <div class="xq_right">
+                    <div class="xq_detail">
+
+                        <p th:text="'出发地：'+${entity.startPlace}"></p>
+                        <p th:text="'目的地：'+${entity.endPlace}"></p>
+                        <p th:text="'价格：￥'+${entity.price}"></p>
+                        <p th:text="'出团日期：'+${entity.startDateAndTime}"></p>
+                        <!--<p th:text="'持续时间：'+${entity.day}+'天'"></p>-->
+                        <p th:text="'所需时间：'+${entity.needTime}+'时'"></p>
+                        <p th:text="'上车地点：'+${entity.gatherPlace}"></p>
+                        <p th:if="${entity.type==0}" >车票类型：飞机票</p>
+                        <p th:if="${entity.type==1}"  >车票类型：火车票</p>
+                        <p th:if="${entity.type==2}"  >车票类型：汽车票</p>
+                        <p th:text="'备注：'+${entity.remark}"></p>
+                    </div>
+                    <!--<div class="share">
+                        <div class="bshare-custom"><strong>分享到&nbsp;&nbsp;</strong><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div>
+                    </div>-->
+                    <div class="xq_button"><a th:if="${session.userName!=null}" th:href="@{/carCreatOrder(id=${entity.id})}">
+                        <img src="images/order_button.jpg"/></a>
+                        <p th:if="${session.userName==null}"><font color="red"> 预定请先登陆</font></p>
+                        <p th:if="${CreatSuccess==true}"><font color="red">预定成功，请前往会员中心-我的订单查看订单</font></p></div>
+                </div>
+            </div>
+            <div class="xq_wrap">
+                <div class="tab_menu xq_menu">
+                    <ul class="xq_ul">
+                        <li class="selected">路线导航</li>
+                    </ul>
+                </div>
+                <div id="allmap" style="height:500px;width:100%;" class="tab_box"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=mr5DYlRg2yZGvSU8ScQI2RZWt5RYFlcs"></script>
+<script th:inline="javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var start = [[${entity.startPlace}]];
+    var end = [[${entity.endPlace}]];
+    //三种驾车策略：最少时间，最短距离，避开高速
+    var routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME,BMAP_DRIVING_POLICY_LEAST_DISTANCE,BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
+    map.clearOverlays();
+    var i=$("#driving_way select").val();
+    search(start,end,routePolicy[1]);
+    function search(start,end,route){
+        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: route});
+        driving.search(start,end);
+    }
+</script>
+</body>
+</html>

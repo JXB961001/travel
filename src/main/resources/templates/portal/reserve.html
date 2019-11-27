@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>餐饮住宿-酒店预定详情页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li   class="cur"><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/hotelAccommodation}">餐饮住宿</a> >> <a th:href="@{/hotelPortalView(id=${entity.id})}">酒店详情</a> >> <a href="#">酒店预定</a></div>
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">餐饮住宿</div>
+                <div class="clumn_con">
+                    <div class="cln_w">
+                        <p>酒店星级</p>
+                        <div class="cln_c clearfix">
+                            <a href="#">五星/豪华</a>
+                            <a href="#">四星/高档</a>
+                            <a href="#">三星/舒适</a> 
+                            <a href="#">经济/客栈</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clumn_r">
+            <table class="cr_table" width="680" border="0" cellspacing="0" cellpadding="0">
+                <form method="post" action="/hotelCreatOrder">
+                <input th:value="${entity.id}" id="hotelId" name="hotelId" type="hidden"/>
+                <tbody>
+              <tr>
+                <td class="td01">酒店名称：</td>
+                <td><input type="text" th:value="${entity.hotelName}" readonly="readonly" name="productName" id="productName"/></td>
+              </tr>
+              <tr>
+                <td class="td01">客户姓名：</td>
+                <td><label>
+                  <input type="text" th:value="${user.name}" name="name" id="name"/>
+                </label></td>
+              </tr>
+              <tr>
+                <td class="td01">手机号码：</td>
+                <td><label>
+                  <input type="text" th:value="${user.linkTel}" name="linkTel" id="linkTel"/>
+                </label></td>
+              </tr>
+              <tr>
+                <td class="td01">身份证号：</td>
+                <td><label>
+                  <input type="text" th:value="${user.icCode}" name="icCode" id="icCode"/>
+                </label></td>
+              </tr>
+              <tr>
+                <td colspan="2" class="td01">
+                  <div class="rz_clu">入住人数：&nbsp;&nbsp;
+                  <label>
+                  <input type="number" name="peopleCount" id="peopleCount"/>
+                  </label></div>
+                  <div class="rz_clu">入住日期：
+                  <label>
+                  <input type="text" name="setoffTime" id="setoffTime" onclick="layui.laydate({elem:this,type: 'datetime'})"/>如:2018-01-01
+                  </label></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="td01">特殊要求：</td>
+                <td class="tarea"><textarea name="requirement" id="requirement" cols="45" rows="5"></textarea></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                  <td><button type="submit"><img src="images/tjbd.jpg"/></button></td>
+              </tr>
+                </tbody>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+<script>
+    layui.config({
+        base : "js/"
+    }).use(['form','layer','jquery','layedit','laydate'],function(){
+        var form = layui.form(),
+            layer = parent.layer === undefined ? layui.layer : parent.layer,
+            laypage = layui.laypage,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            $ = layui.jquery;
+    })
+</script>
+</body>
+</html>

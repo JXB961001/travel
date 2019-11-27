@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>酒店信息添加</title>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/css/font_eolqem241z66flxr.css" media="all"/>
+</head>
+<body class="childrenBody">
+	<form class="layui-form"  action="/manager/hotelSave" method="post" enctype="multipart/form-data">
+		<input th:value="${entity.id}" id="id" name="id" type="hidden"/>
+		<div class="layui-form-item">
+			<label class="layui-form-label">酒店名称</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.hotelName}" id="hotelName" name="hotelName" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入酒店名称"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">联系方式</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.linkPhone}" id="linkPhone" name="linkPhone" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入联系方式"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">酒店地址</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.address}" id="address" name="address" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入酒店地址"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">价格</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.price}" id="price" name="price" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入酒店价格"/>
+			</div>
+		</div>
+		<div class="layui-form-item" th:if="${entity.imgUrl != null}">
+			<label class="layui-form-label">图片</label>
+			<div class="layui-input-block">
+				<img th:src="${entity.imgUrl}" width="300">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选择图片</label>
+			<div class="layui-input-block">
+				<input type="file" name="fileName">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">酒店简介</label>
+			<div class="layui-input-block">
+				<textarea class="layui-textarea" th:text="${entity.hotelIntro}" id="hotelIntro" name="hotelIntro" lay-verify="content" placeholder="请输入酒店简介"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">酒店星级</label>
+			<div class="layui-input-block">
+				<input type="radio" th:checked="${entity.hotelStar==1?'checked':'false'}" name="hotelStar" value="1" title="1星"/>
+				<input type="radio" th:checked="${entity.hotelStar==2?'checked':'false'}" name="hotelStar" value="2" title="2星"/>
+				<input type="radio" th:checked="${entity.hotelStar==3?'checked':'false'}" name="hotelStar" value="3" title="3星"/>
+				<input type="radio" th:checked="${entity.hotelStar==4?'checked':'false'}" name="hotelStar" value="4" title="4星"/>
+				<input type="radio" th:checked="${entity.hotelStar==5?'checked':'false'}" name="hotelStar" value="5" title="5星"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">状态</label>
+			<div class="layui-input-inline">
+				<select id="state" name="state" class="newsLook" lay-filter="browseLook">
+					<option th:selected="${entity.state==0?'selected':'false'}" value="0">待发布</option>
+					<option th:selected="${entity.state==1?'selected':'false'}" value="1">发布</option>
+					<option th:selected="${entity.state==2?'selected':'false'}" value="2">撤销</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" type="submit" lay-submit="">保存</button>
+				<a class="layui-btn" th:href="@{/manager/hotelList}">返回</a>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/hotel/hotelEdit.js"></script>
+</body>
+</html>

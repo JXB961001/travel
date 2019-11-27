@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>餐饮住宿-详情页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li   class="cur"><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/hotelAccommodation}">餐饮住宿</a> >> <a href="#">酒店详情</a></div>
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">餐饮住宿</div>
+                <div class="clumn_con">
+                    <div class="cln_w">
+                        <p>热门酒店</p>
+                        <div class="cln_c clearfix">
+                            <a href="https://baike.baidu.com/item/%E9%94%A6%E6%B1%9F%E4%B9%8B%E6%98%9F%E9%85%92%E5%BA%97" target="_blank">锦江之星</a>
+                            <a href="https://baike.baidu.com/item/%E5%A6%82%E5%AE%B6%E9%85%92%E5%BA%97" target="_blank">如家酒店</a>
+                            <a href="https://baike.baidu.com/item/7%E5%A4%A9%E8%BF%9E%E9%94%81%E9%85%92%E5%BA%97?fromtitle=%E4%B8%83%E5%A4%A9%E8%BF%9E%E9%94%81%E9%85%92%E5%BA%97&fromid=513859" target="_blank">七天连锁酒店</a>
+                            <a href="https://baike.baidu.com/item/%E5%96%9C%E8%BE%BE%E5%B1%8B%E5%9B%BD%E9%99%85%E9%85%92%E5%BA%97" target="_blank">喜达屋国际酒店</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clumn_r">
+            <div class="cr_tit"><b>酒店详情</b>
+                <b th:if="${CreatSuccess==true}">您已预定成功，请前往会员中心-我的订单查看订单</b>
+                <span th:if="${session.userName!=null}">
+                    <a th:href="@{/goReserve(id=${entity.id})}">酒店预定</a></span></div>
+            <div class="cr_wrap">
+                <div class="cr_t"><div class="ct" th:text="${entity.hotelName}"></div> <span th:text="'咨询电话：'+${entity.linkPhone}"></span></div>
+                <div class="cr_con">
+                    <img th:src="${entity.imgUrl}" width="600px"  height="400px"/>
+                    <div class="intro">
+                        <p><b>饭店简介：</b></p>
+                        <p style="text-indent:2em;" th:text="${entity.hotelIntro}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="next_w clearfix">
+                <div class="back"><a th:href="@{/hotelAccommodation}">返回</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="/css/index_style.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<script src="/js/jquery-1.7.2.js" type="text/javascript"></script>
+    <title>旅游信息管理系统</title>
+    <style>
+    	body{
+    		background-color: #212221;
+    	}
+    	
+    	.ct-login{
+			position: relative;
+			z-index: 999;	
+			padding-top: 50px;
+		}
+		
+		.panel-login{
+			width: 320px;
+			padding: 0 0;
+		}
+		
+		.form-item{
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		.header{
+    		position: fixed;
+		    left: 0px;
+		    top: 0px;
+		    z-index: 0;
+			height: 100%;
+		}
+
+		.login {
+			margin: 120px auto 0 auto;
+			min-height: 380px;
+			max-width: 330px;
+			padding: 40px;
+			/*background-color: #ffffff;*/
+			border-radius: 4px;
+			overflow-x: hidden;
+			box-sizing: border-box;
+			width: 330px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -150px;
+			margin-left: -165px;
+			border: 0px;
+
+		}
+
+		.login a.logo {
+			display: block;
+			height: 58px;
+			width: 167px;
+			margin: 0 auto 30px auto;
+			background-size: 167px 42px;
+		}
+
+		.login .message {
+			width: auto;
+			/*margin: 10px 0 0 -58px;*/
+			/*padding: 18px 10px 18px 60px;*/
+			/*background: #252526;*/
+			position: relative;
+			text-align: center;
+			color: #fff;
+			font-size: 21px;
+		}
+
+		.login input[type=text],
+		.login input[type=file],
+		.login input[type=password],
+		.login input[type=email], select {
+			border: 1px solid #DCDEE0;
+			vertical-align: middle;
+			border-radius: 3px;
+			/*height: 50px;*/
+			margin-bottom: 10px;
+			padding: 0px 16px;
+			font-size: 14px;
+			color: #555555;
+			outline: none;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		.login input[type=text]:focus,
+		.login input[type=file]:focus,
+		.login input[type=password]:focus,
+		.login input[type=email]:focus, select:focus {
+			border: 1px solid #27A9E3;
+		}
+
+		.login input[type=submit],
+		.login input[type=button] {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 12px 24px;
+			margin: 0px;
+			font-size: 18px;
+			line-height: 24px;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			cursor: pointer;
+			color: #ffffff;
+			background-color: #393d47;
+			border-radius: 3px;
+			border: none;
+			-webkit-appearance: none;
+			outline: none;
+			width: 100%;
+		}
+
+		.login hr.hr15 {
+			height: 15px;
+			border: none;
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+		}
+
+		.login hr.hr20 {
+			height: 20px;
+			border: none;
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+		}
+    </style>
+</head>
+<body>
+	<div class="header" style="height:100%">
+	  <div class="canvaszz"  style="height:100%"> </div>
+	  <canvas id="canvas"></canvas>
+	</div>
+	<div class="login">
+		<form class="layui-form" method="post" action="/loging">
+			<div class="layui-form-item">
+				<div class="message">旅游信息管理系统</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-black">
+					<input type="text" id="userName" name="userName" required="required" lay-verify="username" placeholder="请输入帐号" autocomplete="off" class="layui-input"/>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-black">
+					<input type="password" id="password" name="password" required="required" lay-verify="password" placeholder="请输入密码" autocomplete="off" class="layui-input"/>
+				</div>
+			</div>
+			<div><p th:text="${message}" style="color: white"></p></div>
+			<button class="layui-btn" type="submit" style="width:100%; background-color: #393d47">登录</button>
+		</form>
+	</div>
+	<div class="layui-footer footer">
+		<p>copyright @2018-2019  All Rights reserved.</p>
+	</div>
+</body>
+</html>

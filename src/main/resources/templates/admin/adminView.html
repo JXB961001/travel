@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>系统用户查看--layui后台管理模板</title>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/css/font_eolqem241z66flxr.css" media="all"/>
+</head>
+<body class="childrenBody">
+	<form class="layui-form"  action="/manager/adminSave" method="post">
+		<input th:value="${entity.id}" id="id" name="id" type="hidden"/>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户名</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.userName}" readonly="readonly" id="userName" name="userName" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入用户名"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.password}" readonly="readonly" id="password" name="password" type="password" class="layui-input newsName" lay-verify="required" placeholder="请输入密码"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">手机号码</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.linkTel}" readonly="readonly" id="linkTel" name="linkTel" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入手机号码"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">真实姓名</label>
+			<div class="layui-input-block">
+				<input th:value="${entity.name}" readonly="readonly" id="name" name="name" type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入真实姓名"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">状态</label>
+			<div class="layui-input-inline">
+				<select id="state" name="state" disabled="disabled" class="newsLook" lay-filter="browseLook">
+					<option th:selected="${entity.state==0?'selected':'false'}" value="0">停用</option>
+					<option th:selected="${entity.state==1?'selected':'false'}" value="1">启用</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<a class="layui-btn" th:href="@{/manager/adminList}">返回</a>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/admin/adminEdit.js"></script>
+</body>
+</html>

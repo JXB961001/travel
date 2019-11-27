@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>旅游车票页</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <style>
+        a{
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/imgtoggle.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+            var iTgl=new k_iToggle();
+            iTgl.init({
+                boxId:'box',
+                numId:'num',
+                imgId:'imgs',
+                isAuto:true,
+                aCls:'act',
+                iCls:'imgs1',
+                direct:'crt'
+            });
+            chg(iTgl,'chg');
+            _auto(iTgl,'auto_1');
+
+            //改变方向
+            function chg(o,id){
+                $('#'+id).click(function(){
+                    if(o.direct()=='crt'){
+                        o.direct('lvl');
+                        $(this).text('纵向');
+                    }else{
+                        o.direct('crt');
+                        $(this).text('横向');
+                    }
+                });
+            }
+
+            function _auto(o,id){
+                $('#'+id).click(function(){
+                    if(o.isAuto){
+                        o.isAuto=false;
+                        $(this).text('自动播放已停止');
+                    }else{
+                        o.isAuto=true;
+                        o.auto();
+                        $(this).text('自动播放');
+                    }
+                });
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            var wweya_li =$("div.tab_menu ul li");
+            wweya_li.click(function(){
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index =  wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function(){
+                $(this).addClass("hover");
+            },function(){
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li  ><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li class="cur" ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/car}">旅游车票</a> </div>
+
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">旅游车票</div>
+                <div class="clumn_con">
+
+
+                    <div class="cln_w">
+                        <p>车票类型</p>
+                        <div class="cln_c clearfix">
+                            <a href="https://baike.baidu.com/item/%E6%9C%BA%E7%A5%A8?fromtitle=%E9%A3%9E%E6%9C%BA%E7%A5%A8&fromid=3033494" target="_blank">飞机票</a>
+                            <a href="https://baike.baidu.com/item/%E7%81%AB%E8%BD%A6%E7%A5%A8/878546" target="_blank">火车票</a>
+                            <a href="https://baike.baidu.com/item/%E6%B1%BD%E8%BD%A6%E7%A5%A8" target="_blank">汽车票</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="clumn_r01">
+            <div class="js_box">
+                <div class="js_tit clearfix">
+                    <div class="xs_w">显示方式：<a class="tw_a" href="#">图文</a></div>
+                    <form id="pageForm" name="pageForm" action="/car" method="post">
+                        <input type="hidden" id="count" name="count" th:value="${pageParam.count}"/>
+                        <input type="hidden" id="pageNumber" name="pageNumber" th:value="${pageParam.pageNumber}"/>
+                        <input type="hidden" id="size" name="size" th:value="${pageParam.size}"/>
+                        <input type="hidden" id="pageSize" name="pageSize" th:value="${pageParam.pageSize}"/>
+                        <div class="fy_w"><a href="#" th:text="${pageParam.pageNumber}+'/'+${pageParam.size}+'页'"> </a>
+                            <a class="previousPage">上一页</a>
+                            <a class="toPageOne">首页</a>
+                            <a class="nextPage">下一页</a>
+                            <a class="toPageLast">尾页</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="js_wrap claerdix">
+                    <div class="js_con clearfix" th:each="var,iterStat: ${pageData}">
+                        <div class="js_l"><a th:href="@{/carPortalView(id=${var.id})}"><img th:src="${var.imgUrl}" style="    height: 75px;"/></a></div>
+                        <div class="js_c">
+                            <p><b><a th:href="@{/carPortalView(id=${var.id})}" th:text="${var.title}"></a></b></p>
+                            <!-- <p><a class="js_pl" href="#"><span>0</span>条评论</a> <a class="js_gm" href="#"><span>102</span>人购买</a></p>-->
+                            <p th:text="'地方：'+${var.startPlace}+' 至 '+${var.endPlace}"></p>
+                            <p th:text="'时间：'+${var.startDateAndTime}"></p>
+                        </div>
+                        <div class="js_r">
+                            <p><span class="fn_o">￥</span><b th:text="${var.price}"></b>起</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div class="zb_wrap clearfix">
+              <div class="zb_tit"><b>杭州周边热门景点</b><a href="#">更多>></a></div>
+              <div class="zb_con clearfix">
+                <ul class="zb_ul">
+                <li><a href="#">游浙东大峡谷，赏小三峡风光，玩白溪漂流，住豪华宁海开元新世纪大酒店，享惬意旅途</a><span>¥710起</span></li>
+                <li><a href="#">【象山海滨游】踏浪、玩沙、游古城，住象山海洋酒店                              </a><span>¥558起</span></li>
+                <li><a href="#">【暑期特惠】双人两日游宁波九龙湖，亲近自然山水风光，住挂牌五星远洲大酒店      </a><span>¥478起</span></li>
+                <li><a href="#">【溪口二日游】感受人文之精华，山水之灵秀，佛教之庄严                          </a><span>¥768起</span></li>
+                <li><a href="#">【凤凰山海港乐园】浪漫、刺激、梦幻，爱她就带她去双人二日游                    </a><span>¥810起</span></li>
+                <li><a href="#">【暑期特惠，杭州浪漫2日自由行】★游西溪湿地非诚勿扰拍摄地，赏西溪浪漫美景！   </a><span>¥410起</span></li>
+                <li><a href="#">杭州临安双人2日游，体验激情漂流，感受峡谷风景，完美旅行，超值特惠！           </a><span>¥510起</span></li>
+                <li><a href="#">【凤凰山海港乐园】浪漫、刺激、梦幻，爱她就带她去双人二日游                    </a><span>¥810起</span></li>
+                <li><a href="#">【暑期特惠，杭州浪漫2日自由行】★游西溪湿地非诚勿扰拍摄地，赏西溪浪漫美景！   </a><span>¥410起</span></li>
+                <li><a href="#">杭州临安双人2日游，体验激情漂流，感受峡谷风景，完美旅行，超值特惠！           </a><span>¥510起</span></li>
+              </ul>
+              </div>
+            </div>-->
+
+
+
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+<script>
+    $(".previousPage").click(function(){
+        if(parseInt($("#pageNumber").val())==1){
+            $("#pageNumber").val(1);
+            return;
+        }else{
+            $("#pageNumber").val(parseInt($("#pageNumber").val())-1);
+            $("#pageForm").submit();
+        }
+    })
+
+    $(".nextPage").click(function(){
+        if(parseInt($("#pageNumber").val())==parseInt($("#size").val())){
+            $("#pageNumber").val(parseInt($("#size").val()));
+            /* alert("xia yi ye1 ");*/
+            return;
+        }else{
+            $("#pageNumber").val(parseInt($("#pageNumber").val())+1);
+            /*alert("xia yi ye2 ");*/
+            $("#pageForm").submit();
+        }
+    })
+
+    $(".toPageOne").click(function(){
+        $("#pageNumber").val(1);
+        $("#pageForm").submit();
+    })
+
+    $(".toPageLast").click(function(){
+        $("#pageNumber").val(parseInt($("#size").val()));
+        $("#pageForm").submit();
+    })
+
+</script>
+</body>
+</html>

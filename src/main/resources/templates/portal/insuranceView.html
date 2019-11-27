@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>中国梦想游--旅游景点页</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var wweya_li =$("div.tab_menu ul li");
+            wweya_li.click(function(){
+                $(this).addClass("selected")
+                    .siblings().removeClass("selected");
+                var index =  wweya_li.index(this);
+                $("div.tab_box > div")
+                    .eq(index).show(100)
+                    .siblings().hide();
+            }).hover(function(){
+                $(this).addClass("hover");
+            },function(){
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li class="cur"><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/insurance}">旅游保险</a>>> <a href="#">保险详情</a> </div>
+    <div class="clumn_w clearfix">
+        <div class="clumn_l">
+            <div class="clumn">
+                <div class="clumn_tit t01">旅游保险</div>
+                <div class="clumn_con">
+                    <div class="cln_w">
+                        <p>保险合作公司</p>
+                        <div class="cln_c clearfix">
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%99%A9%EF%BC%88%E9%9B%86%E5%9B%A2%EF%BC%89%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8?fromtitle=%E4%B8%AD%E5%9B%BD%E5%B9%B3%E5%AE%89&fromid=7740464" target="_blank">中国平安</a>
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E5%AF%BF%E4%BF%9D%E9%99%A9%EF%BC%88%E9%9B%86%E5%9B%A2%EF%BC%89%E5%85%AC%E5%8F%B8?fromtitle=%E4%B8%AD%E5%9B%BD%E4%BA%BA%E5%AF%BF&fromid=1537241" target="_blank">中国人寿</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clumn_r">
+            <div class="tc_tit" th:text="${entity.title}"></div>
+            <div class="xq_wrap clearfix">
+                <div class="xq_left"><img th:src="${entity.imgUrl}"/></div>
+                <div class="xq_right">
+                      <div class="xq_detail">
+                          <p th:if="${entity.insuranceCompany==0}">保险公司：中国平安</p>
+                          <p th:if="${entity.insuranceCompany==1}">保险公司：中国人寿</p>
+                          <p th:if="${entity.type==0}">保险类型：自驾旅游保险</p>
+                          <p th:if="${entity.type==1}">保险类型：高原旅游保险</p>
+                          <p th:if="${entity.type==2}">保险类型：港澳台旅游保险</p>
+                          <p th:if="${entity.type==3}">保险类型：国内自助游保险</p>
+                          <p th:text="'价格：'+${entity.price}"></p>
+
+                          <p th:text="'简介：'+${entity.resume}"></p>
+                      </div>
+                      <!--dvi class="share">
+                          <div class="bshare-custom"><strong>分享到&nbsp;&nbsp;</strong><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div>
+                      </dvi>-->
+                    <div class="xq_button">
+                        <a th:if="${session.userName!=null}" th:href="@{/insuranceCreatOrder(id=${entity.id})}">
+                            <img src="images/order_button.jpg"/></a>
+                        <p th:if="${session.userName==null}"><font color="red" >预定请先登陆</font></p>
+                        <p th:if="${CreatSuccess==true}"><font color="red" >预定成功，请前往会员中心-我的订单查看订单</font></p></div>
+
+                  </div>
+            </div>
+            <div class="xq_wrap">
+                <div class="tab_menu xq_menu">
+                    <ul class="xq_ul">
+                        <li class="selected">保险公司介绍</li>
+                    </ul>
+                </div>
+
+                <div class="xq_detail">
+                    <p th:if="${entity.insuranceCompany==0}">中国平安保险（集团）股份有限公司（以下简称“中国平安”，“公司”，“集团”）于1988年诞生于深圳蛇口，在各级政府及监管部门、广大客户和社会各界的支持下，成长为我国三大综合金融集团之一，在《福布斯》“全球上市公司2000强”中名列第10位，居全球保险集团第一；在美国《财富》世界500强名列第29位，蝉联中国内地混合所有制企业第一。中国平安在香港联合交易所主板及上海证券交易所两地上市。截至2017年年底，集团总市值在全球金融集团中排名第6位，全球保险集团市值、品牌第一。<br/>
+
+                        中国平安致力于成为国际领先的科技型个人金融生活服务集团，坚持“科技引领金融，金融服务生活”的理念，以深化“金融+科技”、探索“金融+生态”为发展模式，聚焦“大金融资产”和“大医疗健康”两大产业，并深度应用于“金融服务、医疗健康、汽车服务、房产金融、城市服务”五大生态圈，为客户创造“专业，让生活更简单”的品牌体验，获得持续的利润增长，向股东提供长期稳定的价值回报。<br/>
+
+                        平安集团旗下子公司包括平安寿险、平安产险、平安养老险、平安健康险、平安银行、平安信托、平安证券、平安基金等，涵盖金融业各个领域，已发展成为中国少数能为客户同时提供保险、银行及投资等全方位金融产品和服务的金融企业之一。此外，中国平安还积极开拓包括陆金所、平安好医生、金融壹账通、平安好房、壹钱包等在内的金融科技业务，并在规模与用户数方面显著增长。<br/>
+
+                        2017年，公司营业收入近1万亿，净利润近1千亿，纳税近1千亿，保险、银行、资产管理等业务板块的各项指标保持领先市场的健康增长。截至2017年12月31日，集团总资产达6.49万亿元，归属母公司股东权益为4,734亿元，个人金融客户数达1.66亿，互联网用户约4.36亿，集团员工约180万人。<br/>
+
+                        近10年来，平安在科技领域的投入已经超过500亿元，集团内聚集了超过23000名科技研发人员和500位大数据专家，建立了6大技术研究院，在金融科技、医疗科技、人工智能、区块链、大数据等方面均取得重大突破，人脸识别、智能读片、区块链、智能音乐、智能环保等多项科研成果获全球大奖。凭借先进的科技优势，结合丰富的应用场景，平安陆续孵化出陆金所、平安好医生、平安医保科技、金融壹账通、智慧城市等多个科技创新平台，向社会输出科技服务。其中，智慧城市云平台方案也已在国内数十个城市陆续进行推广，取得显著成果。<br/>
+
+                        同时，平安的科技服务已逐步走出中国，区块链、人工智能等多项全球领先科技项目在“一带一路”沿线国家及地区落地，得到国际市场的一致好评，为中国金融科技赢得了良好声誉。<br/>
+
+                        作为中国金融保险业中第一家引入外资的企业，中国平安拥有完善的治理架构，国际化、专业化的管理团队。公司一直遵循对股东、客户、员工、社会和合作伙伴负责的企业使命和治理原则，在一致的战略、统一的品牌和文化基础上，确保集团整体朝着共同的目标发展。通过建立完备的职能体系，清晰的发展战略，领先的全面风险管理体系，真实、准确、完整、及时、公平对等的信息披露制度，积极、热情、高效的投资者关系服务理念，为中国平安持续稳定的发展提供保障。<br/>
+
+                        中国平安秉承“专业创造价值”的文化理念，在为股东、员工、客户创造价值的同时，积极履行企业的社会责任，追求与各利益相关方的合作双赢。2018年是中国平安成立30周年，公司积极响应党中央关于“坚决打赢脱贫攻坚战”和“决胜全面建成小康社会”的伟大号召，全面启动总投入100亿元的“三村建设工程”， 面向“村官、村医、村教”实施产业扶贫、健康扶贫、教育扶贫三大精准脱贫计划。中国平安连续十六年获评“中国最受尊敬企业”称号，连续十年荣获“最具责任感企业”赞誉。</p><p></p>
+                    <p th:if="${entity.insuranceCompany==1}">中国人寿保险（集团）公司，是国有特大型金融保险企业，总部设在北京，世界500强企业、中国品牌500强，属中央金融企业。 <br/>
+                        公司前身是成立于1949年的原中国人民保险公司，1996年分设为中保人寿保险有限公司，1999年更名为中国人寿保险公司。2003年，经国务院同意、保监会批准，原中国人寿保险公司重组改制为中国人寿保险（集团）公司，业务范围全面涵盖寿险、财产险、养老保险（企业年金）、资产管理、另类投资、海外业务、电子商务等多个领域，并通过资本运作参股了多家银行、证券公司等其他金融和非金融机构。<br/>
+                        中国人寿保险（集团）公司及其子公司构成了我国最大的国有金融保险集团。2013年，总保费收入达3868亿元，境内寿险业务市场份额为31.6%，总资产达24071亿元，是我国资本市场最大的机构投资者之一。连续13年入选《财富》全球500强，排名第54位；连续7年入选世界品牌500强，位列第237位、入选《中国品牌价值研究院》中国品牌500强，位列第15位。<br/>
+                        所属寿险公司继2003年12月在纽约、香港两地同步上市之后，又于2007年1月回归境内A股市场，成为内地资本市场“保险第一股”和全球第一家在纽约、香港和上海三地上市的保险公司，并已成为全球市值最大的上市寿险公司 。<br/>
+                        2016年8月，中国人寿保险（集团）公司在2016中国企业500强中，排名第12。2018年《财富》世界500强排名第42位。<br/>
+                        2018年11月30日，荣获“2018TOP金融榜评选——年度最佳寿险公司”。</p><p></p>
+                </div>
+
+                <!--</div>-->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+    <center ><p><font style="color: #0C0C0C;font-size: medium;text-align: centerhts reserved.</font></p></center>
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+    <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+    </div>
+</div>-->
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+</body>
+</html>

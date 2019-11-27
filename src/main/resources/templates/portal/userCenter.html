@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>中国梦想游-会员登录页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
+        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <div class="logo"><img src="images/logo.jpg"/></div>
+        <div class="rx_line"><img src="images/rx.jpg"/></div>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}" class="cur"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/userCenter}">会员中心</a></div>
+    <div class="fmember">
+    	<div class="fmleft">
+        	<div class="fmleft_top"><img src="images/fmbt1.png" border="0"/></div>
+            <div class="fmlist">
+            	<ul>
+                	<li class="f1">订单中心</li>
+                	<li> >><a th:href="@{/myOrder}">我的订单</a> </li>
+                    <li> >><a th:href="@{/myMessage}">我的留言</a> </li>
+                </ul>
+
+                <ul>
+                	<li class="f1">账户信息</li>
+                	<li> >><a th:href="@{/personInfo}">个人资料</a> </li>
+                    <li> >><a th:href="@{/changePassword}">修改密码</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="fmright">
+        	<div class="fmr1">
+            	<div class="fmr1_top">会员中心</div>
+                <div class="fmr1_m">
+                	<div class="fgr">
+                    	<div class="fgr_tx">
+                        	<div class="fgr_tx1"><img src="images/touxiang.jpg" width="100px"  height="100px"/></div>
+                            <div class="fgr_tx2"><a th:href="@{/personInfo}">编辑个人资料</a></div>
+                        </div>
+                        <div class="fgr_zl">
+                        	<p class="fp2" th:text="${session.userName}+'，您好！'"></p>
+                            <!--<p class="fp1">安全级别：<img src="images/fgrpic1.png" align="absmiddle"/> &nbsp;&nbsp;
+                                <img src="images/ficon1.png"/>&nbsp;&nbsp;<img src="images/ficon2.png"/>
+                                &nbsp;&nbsp; 验证手机和邮箱可分别获得&nbsp;&nbsp;<a href="#">安全设置</a></p>-->
+                        </div>
+                        <br style="clear:both"/>
+                    </div>
+
+                </div>
+            </div>
+           <!-- <div class="fmr2">
+            	<div class="fmr2_top"><span class="fspan4"><a href="#">更多>></a></span>杭州周边热门景点</div>
+            	<div class="fmr2_m">
+                	<div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                    <div class="fmr2_m1">
+                        <div class="fmr2_m1pic"><img src="images/fzbpic1.png"/></div>
+                        <div class="fmr2_m1text"><a href="#">西湖</a></div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<!--<div class="footer1">
+
+</div>
+<style>
+    .footer1{
+
+        height: 30px;
+
+        width: 100%;
+
+        background-color: #ddd;
+
+        position: fixed;
+
+        bottom: 0;
+
+    }
+</style>-->
+<!--<div class="footer_w">
+    <div class="footer clearfix">
+        <div class="footer_c">
+            <p>地址：哈佛大学 &nbsp;| &nbsp;服务热线：13559778312 &nbsp; | &nbsp;传真：13559778312  备案号：13559778312</p>
+            <p> 中国梦想旅游发展有限公司 All Rights Reserved. 技术支持：<a href="#">哈佛大学</a></p>
+        </div>
+        <div class="f_logo"><img src="images/b_logo.jpg"/></div>
+        <br style="clear:both"/>
+    </div>
+</div>-->
+</body>
+</html>
